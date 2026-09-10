@@ -5,5 +5,5 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 export function setupPinia(app: App): void {
   const pinia = createPinia()
   pinia.use(piniaPluginPersistedstate)
-  app.use(createPinia())
+  app.use(pinia)
 }
