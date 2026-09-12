@@ -4,11 +4,12 @@ import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import BaseLayout from './shared/components/layouts/BaseLayout.vue'
+import BlankLayout from './shared/components/layouts/BlankLayout.vue'
 
 const route = useRoute()
 const layouts = {
   base: BaseLayout,
-  // auth: AuthLayout,
+  auth: BlankLayout,
 }
 
 const layout = computed(() => {

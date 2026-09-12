@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LoginForm from './components/LoginForm.vue'
+import ChangePassWordForm from './components/changePassWordForm.vue'
 import { Moon, Sun } from '@lucide/vue'
 import { useAppStore } from '@/stores/app.store'
 
@@ -175,15 +175,15 @@ const appStore = useAppStore()
           <p class="text-sm text-muted-foreground">Nhập thông tin tài khoản để truy cập hệ thống</p>
         </div>
 
-        <LoginForm />
+        <ChangePassWordForm />
         <!-- === -->
         <div class="text-center text-sm text-muted-foreground mt-4">
-          Bạn chưa có tài khoản quản trị?
+          Quay lại gửi lại mã OTP ?
           <router-link
-            to="/register"
+            to="/forgot-password"
             class="font-medium text-primary hover:underline underline-offset-4"
           >
-            Đăng ký ngay
+            Quay Lại
           </router-link>
         </div>
       </div>
