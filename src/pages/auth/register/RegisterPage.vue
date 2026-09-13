@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LoginForm from './components/LoginForm.vue'
+import RegisterForm from './components/RegisterForm.vue'
 import { Moon, Sun } from '@lucide/vue'
 import { useAppStore } from '@/stores/app.store'
 
@@ -171,19 +171,19 @@ const appStore = useAppStore()
     <div class="lg:p-8 flex h-full items-center justify-center py-12">
       <div class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[380px]">
         <div class="flex flex-col space-y-2 text-center">
-          <h1 class="text-2xl font-semibold tracking-tight">Đăng nhập quản trị viên</h1>
+          <h1 class="text-2xl font-semibold tracking-tight">Đăng kí quản trị viên</h1>
           <p class="text-sm text-muted-foreground">Nhập thông tin tài khoản để truy cập hệ thống</p>
         </div>
 
-        <LoginForm />
-        <!-- === -->
+        <RegisterForm />
+        <!-- ===== -->
         <div class="text-center text-sm text-muted-foreground mt-4">
-          Bạn chưa có tài khoản quản trị?
+          Quay lại trang
           <router-link
-            to="/register"
+            to="/login"
             class="font-medium text-primary hover:underline underline-offset-4"
           >
-            Đăng ký ngay
+            Login ?
           </router-link>
         </div>
       </div>

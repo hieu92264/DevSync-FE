@@ -15,11 +15,12 @@ import {
 // ===
 import { useRouter } from 'vue-router'
 import { toTypedSchema } from '@vee-validate/zod'
-import { loginSchema } from '../login.schemas'
+import { registerSchema } from '../register.schema'
 const showPassword = ref(false)
+const showconfirmPassword = ref(false)
 const route = useRouter()
 const { handleSubmit, errors, defineField, isSubmitting } = useForm({
-  validationSchema: toTypedSchema(loginSchema),
+  validationSchema: toTypedSchema(registerSchema),
   initialValues: {
     username: '',
     password: '',
@@ -50,6 +51,41 @@ const onSubmit = handleSubmit(async (values) => {
           <FormMessage class="text-xs text-destructive font-medium" />
         </FormItem>
       </FormField>
+      <!-- ======= -->
+      <FormField name="email" v-slot="{ componentField }">
+        <FormItem class="space-y-1.5">
+          <FormLabel class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Email
+          </FormLabel>
+          <FormControl>
+            <Input
+              type="email"
+              placeholder="admin@example.com"
+              class="h-11 rounded-lg border-input bg-background/50 px-3.5 py-2 text-sm shadow-sm transition-all duration-200 placeholder:text-muted-foreground/50 focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20"
+              v-bind="componentField"
+            />
+          </FormControl>
+          <FormMessage class="text-xs text-destructive font-medium" />
+        </FormItem>
+      </FormField>
+      <!-- ============== -->
+      <FormField name="yourName" v-slot="{ componentField }">
+        <FormItem class="space-y-1.5">
+          <FormLabel class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Your Name
+          </FormLabel>
+          <FormControl>
+            <Input
+              type="yourName"
+              placeholder="admin@example.com"
+              class="h-11 rounded-lg border-input bg-background/50 px-3.5 py-2 text-sm shadow-sm transition-all duration-200 placeholder:text-muted-foreground/50 focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20"
+              v-bind="componentField"
+            />
+          </FormControl>
+          <FormMessage class="text-xs text-destructive font-medium" />
+        </FormItem>
+      </FormField>
+      <!-- =================== -->
 
       <FormField name="password" v-slot="{ componentField }">
         <FormItem class="space-y-1.5">
@@ -57,12 +93,6 @@ const onSubmit = handleSubmit(async (values) => {
             <FormLabel class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Password
             </FormLabel>
-            <router-link
-              to="/forgot-password"
-              class="text-xs font-medium text-primary hover:text-primary/80 transition-colors underline-offset-4 hover:underline"
-            >
-              Forget Password
-            </router-link>
           </div>
           <FormControl>
             <div class="relative">
@@ -79,6 +109,36 @@ const onSubmit = handleSubmit(async (values) => {
                 @click="showPassword = !showPassword"
               >
                 <Eye v-if="showPassword" class="size-4" />
+                <EyeOff v-else class="size-4" />
+              </button>
+            </div>
+          </FormControl>
+          <FormMessage class="text-xs text-destructive font-medium" />
+        </FormItem>
+      </FormField>
+      <!-- ================== -->
+      <FormField name="confirmPassword" v-slot="{ componentField }">
+        <FormItem class="space-y-1.5">
+          <div class="flex items-center justify-between">
+            <FormLabel class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Confirm Password
+            </FormLabel>
+          </div>
+          <FormControl>
+            <div class="relative">
+              <Input
+                :type="showconfirmPassword ? 'text' : 'password'"
+                placeholder="••••••••"
+                class="h-11 rounded-lg border-input bg-background/50 px-3.5 py-2 pr-12 text-sm shadow-sm transition-all duration-200 placeholder:text-muted-foreground/50 focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20"
+                v-bind="componentField"
+              />
+
+              <button
+                type="button"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors p-1"
+                @click="showconfirmPassword = !showconfirmPassword"
+              >
+                <Eye v-if="showconfirmPassword" class="size-4" />
                 <EyeOff v-else class="size-4" />
               </button>
             </div>
