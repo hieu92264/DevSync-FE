@@ -3,6 +3,7 @@ import LoginPage from './login/LoginPage.vue'
 import RegisterPage from './register/RegisterPage.vue'
 import ForgotPasswordPage from './forgotPassword/forgotPasswordPage.vue'
 import ChangePassWordPage from './changePassWord/changePassWordPage.vue'
+import Organization from '../organization.vue'
 import { defineComponent, h } from 'vue'
 // Trang placeholder tạm thời để xem layout
 const PlaceholderPage = defineComponent({
@@ -67,6 +68,15 @@ export const authRoute: RouteRecordRaw[] = [
         component: ChangePassWordPage,
         meta: {
           title: 'changePassword',
+          layout: 'auth',
+        },
+      },
+      {
+        path: 'organization',
+        name: 'organization',
+        component: Organization,
+        meta: {
+          title: 'organization',
           layout: 'auth',
         },
       },
