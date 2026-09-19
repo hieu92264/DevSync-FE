@@ -5,6 +5,7 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import BaseLayout from './shared/components/layouts/BaseLayout.vue'
 import BlankLayout from './shared/components/layouts/BlankLayout.vue'
+import { Toaster } from '@/shared/components/ui/sonner/index.ts'
 
 const route = useRoute()
 const layouts = {
@@ -21,5 +22,6 @@ const layout = computed(() => {
   <component :is="layout">
     <RouterView />
     <VueQueryDevtools />
+    <Toaster />
   </component>
 </template>

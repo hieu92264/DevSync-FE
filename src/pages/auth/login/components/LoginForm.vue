@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useForm } from 'vee-validate'
 import { ref } from 'vue'
-import { Eye, EyeOff } from '@lucide/vue'
+import { Eye, EyeOff, LoaderCircle } from '@lucide/vue'
 import { Input } from '@/shared/components/ui/input'
 import { Button } from '@/shared/components/ui/button'
 import {
@@ -16,9 +16,12 @@ import {
 import { useRouter } from 'vue-router'
 import { toTypedSchema } from '@vee-validate/zod'
 import { loginSchema } from '../login.schemas'
+import { useLoginMutation } from '@/pages/auth/login/composables/useLoginMutation'
+import { toast } from 'vue-sonner'
+
 const showPassword = ref(false)
-const route = useRouter()
-const { handleSubmit, errors, defineField, isSubmitting } = useForm({
+const router = useRouter()
+const { handleSubmit, isSubmitting } = useForm({
   validationSchema: toTypedSchema(loginSchema),
   initialValues: {
     username: '',
@@ -26,8 +29,18 @@ const { handleSubmit, errors, defineField, isSubmitting } = useForm({
   },
 })
 
+const loginMutation = useLoginMutation()
+
 const onSubmit = handleSubmit(async (values) => {
-  // =========
+  try {
+    await loginMutation.mutateAsync(values)
+
+    toast.success('Login successful! Redirecting...')
+    await router.push('/dashboard')
+  } catch {
+    toast.error('Login failed. Please check your credentials and try again.')
+  }
+
 })
 </script>
 
@@ -90,8 +103,11 @@ const onSubmit = handleSubmit(async (values) => {
       <div class="pt-2 space-y-3">
         <Button
           type="submit"
+          :disabled="isSubmitting"
+          :aria-busy="isSubmitting"
           class="h-11 w-full rounded-lg bg-primary text-primary-foreground font-medium shadow-md shadow-primary/20 hover:bg-primary/90 transition-all active:scale-[0.99]"
         >
+          <LoaderCircle v-if="isSubmitting" class="mr-2 size-4 animate-spin" />
           Đăng nhập quản trị
         </Button>
 
