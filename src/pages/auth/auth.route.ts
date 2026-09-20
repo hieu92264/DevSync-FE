@@ -40,6 +40,7 @@ export const authRoute: RouteRecordRaw[] = [
         meta: {
           title: 'login',
           layout: 'auth',
+          guestOnly: true,
         },
       },
 
